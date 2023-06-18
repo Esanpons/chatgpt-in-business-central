@@ -1,0 +1,51 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Contenedor",
+            "request": "launch",
+            "type": "al",
+            "environmentType": "OnPrem",
+            "server": "http://bcserver",
+            "serverInstance": "BC",
+            "authentication": "UserPassword",
+            "startupObjectId": 22,
+            "startupObjectType": "Page",
+            "breakOnError": true,
+            "launchBrowser": true,
+            "enableLongRunningSqlStatements": true,
+            "enableSqlInformationDebugger": true,
+            "tenant": "default",
+            "schemaUpdateMode": "ForceSync"
+        },
+        {
+            "name": "DebbugerWebService",
+            "type": "al",
+            "request": "attach",
+            "server": "http://bcserver",
+            "serverInstance": "BC",
+            "authentication": "UserPassword",
+            "breakOnError": true,
+            "breakOnRecordWrite": false,
+            "enableSqlInformationDebugger": true,
+            "enableLongRunningSqlStatements": true,
+            "longRunningSqlStatementsThreshold": 500,
+            "numberOfSqlStatements": 10,
+            "breakOnNext": "WebServiceClient"
+        },
+        {
+            "name": "Microsoft cloud sandbox",
+            "request": "launch",
+            "type": "al",
+            "environmentType": "Sandbox",
+            "environmentName": "sandbox",
+            "tenant": "default",
+            "startupObjectId": 22,
+            "startupObjectType": "Page",
+            "breakOnError": "All",
+            "launchBrowser": true,
+            "enableLongRunningSqlStatements": true,
+            "enableSqlInformationDebugger": true
+        }
+    ]
+}

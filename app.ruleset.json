@@ -1,0 +1,25 @@
+{
+    "name": "Ruleset Esanpons",
+    "rules": [
+        {
+            "id": "AS0084",
+            "justification": "Rango Id fuera de licencia por el tema de que no es una extension del AppSource",
+            "action": "None"
+        },
+        {
+            "id": "AS0092",
+            "justification": "propiedad para el app.json para extensiones del AppSource",
+            "action": "None"
+        },
+        {
+            "id": "AS0054",
+            "justification": "Es para evitar el mandatorySuffix o mandatoryPrefix que nos pediría si utilizáramos esta extension para AppSource",
+            "action": "None"
+        },
+        {
+            "id": "AA0232",
+            "justification": "Es para evitar el SIFT en los FlowFields",
+            "action": "None"
+        }
+    ]
+}
