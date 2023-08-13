@@ -75,7 +75,14 @@ page 50001 "Ask ChatGPT"
 
     trigger OnOpenPage()
     begin
-        Prompt := Text001Txt;
+        if Prompt = '' then
+            Prompt := Text001Txt;
+    end;
+
+
+    procedure SetPrompt(NewPrompt: Text)
+    begin
+        Prompt := NewPrompt;
     end;
 
     var
