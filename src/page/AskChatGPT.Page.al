@@ -20,7 +20,6 @@ page 50001 "Ask ChatGPT"
                     ShowCaption = false;
                     ApplicationArea = All;
                     MultiLine = true;
-                    Width = 100;
                 }
             }
             group(RequestGroup)
@@ -32,7 +31,6 @@ page 50001 "Ask ChatGPT"
                     ShowCaption = false;
                     ApplicationArea = All;
                     MultiLine = true;
-                    Width = 100;
                 }
             }
             group(ResponseGroup)
@@ -44,7 +42,6 @@ page 50001 "Ask ChatGPT"
                     ShowCaption = false;
                     ApplicationArea = All;
                     MultiLine = true;
-                    Width = 100;
                 }
             }
         }
@@ -76,9 +73,14 @@ page 50001 "Ask ChatGPT"
         }
     }
 
-    var
-        Request: Text[250];
-        Prompt: Text[250];
-        Response: Text;
+    trigger OnOpenPage()
+    begin
+        Prompt := Text001Txt;
+    end;
 
+    var
+        Request: Text;
+        Prompt: Text;
+        Response: Text;
+        Text001Txt: Label 'You are an assistant for users using Dynamics 365 Business Central. Answer the questions asked by the user in a simple and precise way.', Comment = 'ESP="Eres un asistente para los usuarios que usan Dynamics 365 Business Central. Responder a las preguntas realizadas por el usuario de forma sencilla y precisa."';
 }
