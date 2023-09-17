@@ -85,6 +85,7 @@ page 50001 "Ask ChatGPT"
 
     trigger OnOpenPage()
     begin
+
         VisibleFieldsRequest := true;
         if Prompt = '' then
             Prompt := Text001Txt;
@@ -93,17 +94,22 @@ page 50001 "Ask ChatGPT"
             VisibleFieldsRequest := false;
             Prompt := '';
         end;
+        if Prompt = '' then
+            Prompt := Text001Txt;
+
     end;
 
 
     procedure SetPrompt(NewPrompt: Text)
     begin
         Prompt := NewPrompt;
+
     end;
 
     procedure ActiveImage()
     begin
         RequestImage := true;
+
     end;
 
     var

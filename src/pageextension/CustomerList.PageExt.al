@@ -16,6 +16,7 @@ pageextension 50000 "CustomerList" extends "Customer List"
                     AskChatGPT: Page "Ask ChatGPT";
                 begin
                     AskChatGPT.SetPrompt(CreatePromptCustomer());
+
                     AskChatGPT.Run()
                 end;
             }
@@ -32,6 +33,9 @@ pageextension 50000 "CustomerList" extends "Customer List"
                 begin
                     AskChatGPT.ActiveImage();
                     AskChatGPT.Run()
+
+                    AskChatGPT.RunModal()
+
                 end;
             }
         }
