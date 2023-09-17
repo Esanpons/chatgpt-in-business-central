@@ -16,7 +16,26 @@ pageextension 50000 "CustomerList" extends "Customer List"
                     AskChatGPT: Page "Ask ChatGPT";
                 begin
                     AskChatGPT.SetPrompt(CreatePromptCustomer());
+
+                    AskChatGPT.Run()
+                end;
+            }
+            action("Create Images")
+            {
+                ToolTip = 'Create Images', Comment = 'ESP="Crear imagenes"';
+                Caption = 'Create Images', Comment = 'ESP="Crear imagenes"';
+                ApplicationArea = All;
+                Image = CreateBinContent;
+
+                trigger OnAction()
+                var
+                    AskChatGPT: Page "Ask ChatGPT";
+                begin
+                    AskChatGPT.ActiveImage();
+                    AskChatGPT.Run()
+
                     AskChatGPT.RunModal()
+
                 end;
             }
         }

@@ -13,9 +13,10 @@ page 50001 "Ask ChatGPT"
         {
             group(PromptGroup)
             {
+                Visible = VisibleFieldsRequest;
                 ShowCaption = true;
                 Caption = 'Prompt', Comment = 'ESP="Prompt"';
-                field(Prompt; Prompt)
+                field(PromptField; Prompt)
                 {
                     ShowCaption = false;
                     ApplicationArea = All;
@@ -26,7 +27,7 @@ page 50001 "Ask ChatGPT"
             {
                 ShowCaption = true;
                 Caption = 'Request', Comment = 'ESP="Pregunta"';
-                field(Request; Request)
+                field(RequestField; Request)
                 {
                     ShowCaption = false;
                     ApplicationArea = All;
@@ -37,11 +38,17 @@ page 50001 "Ask ChatGPT"
             {
                 ShowCaption = true;
                 Caption = 'Response', Comment = 'ESP="Respuesta"';
-                field(Response; Response)
+                field(ResponseField; Response)
                 {
+                    Visible = VisibleFieldsRequest;
                     ShowCaption = false;
                     ApplicationArea = All;
                     MultiLine = true;
+                }
+                usercontrol(AddImage; "Imagen")
+                {
+                    ApplicationArea = All;
+                    Visible = RequestImage;
                 }
             }
         }
@@ -66,8 +73,11 @@ page 50001 "Ask ChatGPT"
                     MgtChatGPT: Codeunit "Mgt. ChatGPT";
                 begin
                     Clear(MgtChatGPT);
-                    MgtChatGPT.SetParams(Prompt, Request);
+                    MgtChatGPT.SetParams(Prompt, Request, RequestImage);
                     Response := MgtChatGPT.GetResponse();
+
+                    if RequestImage then
+                        CurrPage.AddImage.CargarImagenBase64(Response);
                 end;
             }
         }
@@ -75,19 +85,39 @@ page 50001 "Ask ChatGPT"
 
     trigger OnOpenPage()
     begin
+
+        VisibleFieldsRequest := true;
         if Prompt = '' then
             Prompt := Text001Txt;
+
+        if RequestImage then begin
+            VisibleFieldsRequest := false;
+            Prompt := '';
+        end;
+        if Prompt = '' then
+            Prompt := Text001Txt;
+
     end;
 
 
     procedure SetPrompt(NewPrompt: Text)
     begin
         Prompt := NewPrompt;
+
+    end;
+
+    procedure ActiveImage()
+    begin
+        RequestImage := true;
+
     end;
 
     var
         Request: Text;
         Prompt: Text;
         Response: Text;
+        RequestImage: Boolean;
+        VisibleFieldsRequest: Boolean;
         Text001Txt: Label 'You are an assistant for users using Dynamics 365 Business Central. Answer the questions asked by the user in a simple and precise way.', Comment = 'ESP="Eres un asistente para los usuarios que usan Dynamics 365 Business Central. Responder a las preguntas realizadas por el usuario de forma sencilla y precisa."';
+
 }
